@@ -52,13 +52,12 @@
 // app.listen(PORT, '0.0.0.0', () => console.log(`🚀 Server running on port ${PORT}`));
 
 
-
 const express = require("express");
 const { sequelize } = require("./models");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const path = require("path");
-const cors = require("cors"); // Move to top
+const cors = require("cors");
 
 // Import routes
 const authRoutes = require("./routes/authRoutes");
@@ -72,7 +71,7 @@ const transactionReceiptRoutes = require("./routes/transactionReceiptRoutes");
 
 const app = express();
 
-// ✅ CRITICAL: CORS MUST come first!
+// ✅ CORS first - this should handle OPTIONS automatically
 app.use(cors({
   origin: 'http://localhost:5174',
   credentials: true,
@@ -80,16 +79,13 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// ✅ Then other middleware
+// Other middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// ✅ EXPLICIT OPTIONS handler for all routes
-app.options('*', (req, res) => {
-  console.log('✅ OPTIONS preflight handled for:', req.url);
-  res.status(200).end();
-});
+// ✅ REMOVE the problematic app.options('*') line completely
+// ❌ DELETE THIS: app.options('*', (req, res) => { ... });
 
 app.use("/receipts", express.static(path.join(__dirname, "receipts")));
 
