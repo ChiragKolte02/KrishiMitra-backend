@@ -21,9 +21,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const cors=require("cors")
 
+// app.use(cors({
+//   origin: *, // Add your frontend URLs
+//   credentials: true, // If you're using cookies/auth headers
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization']
+// }));
+
 app.use(cors({
-  origin: ['http://localhost:5174', 'http://localhost:5173'], // Add your frontend URLs
-  credentials: true, // If you're using cookies/auth headers
+  origin: '*', // Allow all domains
+  credentials: false, // No cookies/auth headers
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
