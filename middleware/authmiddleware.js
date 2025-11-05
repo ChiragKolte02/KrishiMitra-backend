@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
-const { verifyToken } = require("../utils/jwtutils");
+const { verifyToken } = require("../utils/jwtUtils");
 
 // Auth middleware to support both header and cookie
 const authMiddleware = async (req, res, next) => {
