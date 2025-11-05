@@ -29,7 +29,7 @@ app.use(cors({
 }));
 
 // Handle preflight requests
-app.options('*', cors());
+app.options('*', (req, res) => res.status(200).end());
 
 app.use("/receipts", express.static(path.join(__dirname, "receipts")));
 
