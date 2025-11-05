@@ -21,19 +21,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 const cors=require("cors")
 
-// app.use(cors({
-//   origin: *, // Add your frontend URLs
-//   credentials: true, // If you're using cookies/auth headers
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-
 app.use(cors({
-  origin: '*', // Allow all domains
-  credentials: false, // No cookies/auth headers
+  origin: 'http://localhost:5174',
+  credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use("/receipts", express.static(path.join(__dirname, "receipts")));
 
