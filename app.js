@@ -28,8 +28,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-// Handle preflight requests
-app.options('*', (req, res) => res.status(200).end());
 
 app.use("/receipts", express.static(path.join(__dirname, "receipts")));
 
