@@ -22,10 +22,13 @@ app.use(cookieParser());
 const cors=require("cors")
 
 app.use(cors({
-    origin:"http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE","PATCH"],
-    credentials: true
-}))
+  origin: [
+    "http://localhost:5173",
+    "https://krishimitra-frontend.onrender.com"   // your deployed frontend URL
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true
+}));
 
 app.use("/receipts", express.static(path.join(__dirname, "receipts")));
 
